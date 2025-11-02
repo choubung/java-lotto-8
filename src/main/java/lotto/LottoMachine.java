@@ -18,10 +18,6 @@ public class LottoMachine {
         return lottos;
     }
 
-    public void setLottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
     public int getLottoCount() {
         return lottoCount;
     }
@@ -31,6 +27,7 @@ public class LottoMachine {
     }
 
     public void BuyLotto() {
+        System.out.println("구입금액을 입력해 주세요.");
         try {
             int amount = Integer.parseInt(Console.readLine());
 
