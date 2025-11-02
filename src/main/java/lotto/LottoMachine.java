@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,11 +33,11 @@ public class LottoMachine {
 
     public void ReleaseLotto(int lottoCount) {
         while (lottoCount-- > 0) {
-            List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+            List<Lotto> lotto = new ArrayList<>();
+            lotto.add(new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)));
 
-            String numbersStr = numbers.stream().map(String::valueOf).collect(Collectors.joining(", "));
-
-            System.out.println("[" + numbersStr + "]");
+            String lottoStr = lotto.toString();
+            System.out.println(lottoStr);
         }
     }
 }
