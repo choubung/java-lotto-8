@@ -5,10 +5,10 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
     static final int LOTTO_PRICE = 1000;
+    private List<Lotto> lottos = new ArrayList<>();
 
     public void BuyLotto() {
         try {
@@ -33,10 +33,9 @@ public class LottoMachine {
 
     public void ReleaseLotto(int lottoCount) {
         while (lottoCount-- > 0) {
-            List<Lotto> lotto = new ArrayList<>();
-            lotto.add(new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)));
+            lottos.add(new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)));
 
-            String lottoStr = lotto.toString();
+            String lottoStr = lottos.toString();
             System.out.println(lottoStr);
         }
     }
