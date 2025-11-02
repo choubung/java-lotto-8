@@ -14,6 +14,14 @@ public class LottoMachine {
     public LottoMachine() {
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public void setLottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public int getLottoCount() {
         return lottoCount;
     }
@@ -45,9 +53,10 @@ public class LottoMachine {
 
     public void ReleaseLotto(int lottoCount) {
         while (lottoCount-- > 0) {
-            lottos.add(new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)));
+            Lotto lotto = new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+            lottos.add(lotto);
 
-            String lottoStr = lottos.toString();
+            String lottoStr = lotto.toString();
             System.out.println(lottoStr);
         }
     }
