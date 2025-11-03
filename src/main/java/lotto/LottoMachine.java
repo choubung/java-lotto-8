@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoMachine {
     static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos = new ArrayList<>();
-    private int lottoCount; // 구매 개수
+    private int totalAmount; // 구매 금액
 
     public LottoMachine() {
     }
@@ -18,12 +18,12 @@ public class LottoMachine {
         return lottos;
     }
 
-    public int getLottoCount() {
-        return lottoCount;
+    public int getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setLottoCount(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public void setTotalAmount(int lottoCount) {
+        this.totalAmount = lottoCount;
     }
 
     public void BuyLotto() {
@@ -32,10 +32,11 @@ public class LottoMachine {
             int amount = Integer.parseInt(Console.readLine());
 
             validatePurchaseAmount(amount);
+            setTotalAmount(amount);
 
-            setLottoCount(amount / LOTTO_PRICE);
-            System.out.println(getLottoCount() + "개를 구매했습니다.");
-            ReleaseLotto(getLottoCount());
+            int lottoCount = amount / LOTTO_PRICE;
+            System.out.println(lottoCount + "개를 구매했습니다.");
+            ReleaseLotto(lottoCount);
 
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 구매 금액은 정수여야 합니다.");
