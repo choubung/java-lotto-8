@@ -29,8 +29,10 @@ public class WinningSystemManager {
         while (true) {
             System.out.println("당첨 번호를 입력해 주세요.");
             try {
-                String winningNumsStr = Console.readLine();
-                List<Integer> winningNumbers = validatedWinningNumsStr(winningNumsStr.split(","));
+                String[] winningNumsStr = Console.readLine().split(",");
+
+                validateWinningNumsStr(winningNumsStr);
+                List<Integer> winningNumbers = convertStringsToNumbers(winningNumsStr);
 
                 winningLotto = new WinningLotto(winningNumbers, 0);
                 break;
@@ -46,7 +48,6 @@ public class WinningSystemManager {
             try {
                 int bonus = Integer.parseInt(Console.readLine());
 
-                validateBonus(bonus);
                 winningLotto.setBonusNumber(bonus);
                 break;
             } catch (NumberFormatException e) {
@@ -92,31 +93,24 @@ public class WinningSystemManager {
         System.out.println("총 수익률은 " + profitRate + "%입니다.");
     }
 
-    private ArrayList<Integer> validatedWinningNumsStr(String[] winningNumbersStr) {
+    private void validateWinningNumsStr(String[] winningNumbersStr) {
         for (String numberStr : winningNumbersStr) {
             try {
                 int number = Integer.parseInt(numberStr.trim());
-
                 if (number < 1 || number > 45) {
                     throw new IllegalArgumentException("[ERROR] 당첨 번호는 1~45 범위의 번호여야 합니다.");
                 }
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("[ERROR] ,를 구분자로 가지는 숫자만 입력해야 합니다.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
-
-        return (ArrayList<Integer>) Arrays.stream(winningNumbersStr)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 
-    private void validateBonus(int bonus) {
-        if (bonus < 1 || bonus > 45) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1~45 범위의 번호여야 합니다.");
-        }
-
-        if (winningLotto.getLotto().getNumbers().contains(bonus)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨번호와 겹치지 않는 번호여야 합니다.");
-        }
+    private ArrayList<Integer> convertStringsToNumbers(String[] numbersStr) {
+        return (ArrayList<Integer>) Arrays.stream(numbersStr)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
