@@ -21,4 +21,8 @@ public class WinningLotto {
     public int getBonusNumber() {
         return bonusNumber;
     }
+
+    public void setBonusNumber(int bonusNumber) {
+        this.bonusNumber = bonusNumber;
+    }
 }

@@ -14,22 +14,6 @@ public class LottoMachine {
     public LottoMachine() {
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public int getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(int totalAmount) {
-        if (totalAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("[ERROR] 구매 금액은 1000의 배수여야 합니다.");
-        }
-
-        this.totalAmount = totalAmount;
-    }
-
     public void BuyLotto() {
         while (true) {
             System.out.println("구입금액을 입력해 주세요.");
@@ -60,5 +44,21 @@ public class LottoMachine {
             String lottoStr = lotto.toString();
             System.out.println(lottoStr);
         }
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(int totalAmount) {
+        if (totalAmount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("[ERROR] 구매 금액은 1000의 배수여야 합니다.");
+        }
+
+        this.totalAmount = totalAmount;
     }
 }

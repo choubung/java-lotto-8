@@ -18,18 +18,6 @@ public enum LottoRank {
         this.message = message;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
     public static LottoRank valueOf(int matchCount, boolean hasBonus){
         if (matchCount == 6){
             return FIRST;
@@ -47,5 +35,13 @@ public enum LottoRank {
             return FIFTH;
         }
         return LOSE;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
