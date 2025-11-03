@@ -17,6 +17,13 @@ class LottoTest {
         assertThat(lotto.getNumbers()).isSorted();
     }
 
+    @DisplayName("toString() 메소드가 '[1, 2, 3, 4, 5, 6]' 형식으로 반환해야 한다.")
+    @Test
+    void 로또_번호_출력_형식_테스트(){
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat("[1, 2, 3, 4, 5, 6]").isEqualTo(lotto.toString());
+    }
+
     @DisplayName("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.")
     @Test
     void 로또_번호의_개수가_6개가_넘어가면_예외가_발생한다() {
