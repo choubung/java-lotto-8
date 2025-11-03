@@ -6,13 +6,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningSystemManager {
-    private double profit;
-    private WinningLotto winningLotto;
-    private Map<LottoRank, Integer> rankCounts = new HashMap<LottoRank, Integer>();
-    private LottoRank[] ranksToPrint = new LottoRank[]{
+    private final LottoCalculator calculator = new LottoCalculator();
+
+    private final LottoRank[] ranksToPrint = new LottoRank[]{
             LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD,
             LottoRank.SECOND, LottoRank.FIRST
     };
+    private WinningLotto winningLotto;
+
 
     public void saveWinningLotto() {
         readWinLottoNumbers();
@@ -20,8 +21,8 @@ public class WinningSystemManager {
     }
 
     public void printLottoResult(LottoMachine lottoMachine) {
-        calculateResult(lottoMachine.getLottos()); // 당첨 결과 계산
-        calculateProfit(lottoMachine.getTotalAmount()); // 수익률 계산
+        calculator.calculateResult(lottoMachine.getLottos(), winningLotto); // 당첨 결과 계산
+        calculator.calculateProfit(lottoMachine.getTotalAmount()); // 수익률 계산
         printWinningStatistics(); // 탕첨 통계 출력
     }
 
@@ -58,30 +59,10 @@ public class WinningSystemManager {
         }
     }
 
-    private void calculateResult(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            List<Integer> targetNumbers = lotto.getNumbers();
-            List<Integer> winningNumbers = winningLotto.getLotto().getNumbers();
-
-            int matchCount = (int) targetNumbers.stream().filter(winningNumbers::contains).count();
-            boolean hasBonus = targetNumbers.contains(winningLotto.getBonusNumber());
-
-            LottoRank rank = LottoRank.valueOf(matchCount, hasBonus);
-            rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
-        }
-    }
-
-    private void calculateProfit(int totalAmount) {
-        double winningAmount = 0.0;
-
-        for (LottoRank rank : ranksToPrint) {
-            winningAmount += rankCounts.getOrDefault(rank, 0) * rank.getPrizeMoney();
-        }
-
-        profit = winningAmount / totalAmount * 100;
-    }
-
     private void printWinningStatistics() {
+        Map<LottoRank, Integer> rankCounts = calculator.getRankCounts();
+        double profit = calculator.getProfitRate();
+
         System.out.println("당첨 통계\n---");
 
         for (LottoRank rank : ranksToPrint) {
