@@ -65,7 +65,7 @@ public class WinningLottoManager {
         for (LottoRank rank : ranksToPrint) {
             winningAmount += rankCounts.getOrDefault(rank, 0) * rank.getPrizeMoney();
         }
-        profit = Math.round(winningAmount / totalAmount * 100) ;
+        profit = winningAmount / totalAmount * 100 ;
     }
 
     private void printWinningStatistics() {
@@ -74,6 +74,7 @@ public class WinningLottoManager {
             int count = rankCounts.getOrDefault(rank, 0);
             System.out.println(rank.getMessage() + " - " + count + "개");
         }
-        System.out.println("총 수익률은 " + profit + "%입니다.");
+        String profitRate = String.format("%.1", profit);
+        System.out.println("총 수익률은 " + profitRate + "%입니다.");
     }
 }
