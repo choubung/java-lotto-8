@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoMachine {
     static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos = new ArrayList<>();
-    private int totalAmount; // 구매 금액
+    private int totalAmount = 0; // 구매 금액
 
     public LottoMachine() {
     }
@@ -22,34 +22,37 @@ public class LottoMachine {
         return totalAmount;
     }
 
-    public void setTotalAmount(int lottoCount) {
-        this.totalAmount = lottoCount;
+    public void setTotalAmount(int totalAmount) {
+        if (totalAmount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("[ERROR] 구매 금액은 1000의 배수여야 합니다.");
+        }
+
+        this.totalAmount = totalAmount;
     }
 
     public void BuyLotto() {
-        System.out.println("구입금액을 입력해 주세요.");
-        try {
-            int amount = Integer.parseInt(Console.readLine());
+        while (true) {
+            System.out.println("구입금액을 입력해 주세요.");
+            try {
+                int amount = Integer.parseInt(Console.readLine());
 
-            validatePurchaseAmount(amount);
-            setTotalAmount(amount);
+                setTotalAmount(amount);
+                ReleaseLotto();
 
-            int lottoCount = amount / LOTTO_PRICE;
-            System.out.println(lottoCount + "개를 구매했습니다.");
-            ReleaseLotto(lottoCount);
-
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 구매 금액은 정수여야 합니다.");
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 구매 금액은 정수여야 합니다.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    private void validatePurchaseAmount(int amount) {
-        if (amount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("[ERROR] 구매 금액은 1000의 배수여야 합니다.");
-        }
-    }
+    public void ReleaseLotto() {
+        int lottoCount = getTotalAmount() / LOTTO_PRICE;
 
-    public void ReleaseLotto(int lottoCount) {
+        System.out.println(lottoCount + "개를 구매했습니다.");
+
         while (lottoCount-- > 0) {
             Lotto lotto = new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6));
             lottos.add(lotto);
