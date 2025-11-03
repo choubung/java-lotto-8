@@ -10,6 +10,3 @@ public class Application {
             winningLottoManager.printLottoResult(machine); // 당첨 결과 출력
     }
 }
-
-
-
