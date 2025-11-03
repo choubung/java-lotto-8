@@ -10,6 +10,12 @@ public class LottoCalculator {
     };
     private double profitRate;
 
+    public LottoCalculator() {
+        for (LottoRank rank : ranks) {
+            rankCounts.put(rank, 0);
+        }
+    }
+
     public void calculateResult(List<Lotto> lottos, WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
             List<Integer> targetNumbers = lotto.getNumbers();
@@ -21,7 +27,7 @@ public class LottoCalculator {
             LottoRank rank = LottoRank.valueOf(matchCount, hasBonus);
 
             if (rankCounts.containsKey(rank)) {
-                rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1);
+                rankCounts.put(rank, rankCounts.get(rank) + 1);
             }
         }
     }

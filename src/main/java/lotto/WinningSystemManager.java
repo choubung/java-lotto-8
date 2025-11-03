@@ -76,21 +76,22 @@ public class WinningSystemManager {
 
     private void validateWinningNumsStr(String[] winningNumbersStr) {
         for (String numberStr : winningNumbersStr) {
+            int number;
             try {
-                int number = Integer.parseInt(numberStr.trim());
-                if (number < 1 || number > 45) {
-                    throw new IllegalArgumentException("[ERROR] 당첨 번호는 1~45 범위의 번호여야 합니다.");
-                }
+                number = Integer.parseInt(numberStr.trim());
+
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("[ERROR] ,를 구분자로 가지는 숫자만 입력해야 합니다.");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            }
+            if (number < 1 || number > 45) {
+                throw new IllegalArgumentException("[ERROR] 당첨 번호는 1~45 범위의 번호여야 합니다.");
             }
         }
     }
 
     private ArrayList<Integer> convertStringsToNumbers(String[] numbersStr) {
         return (ArrayList<Integer>) Arrays.stream(numbersStr)
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
