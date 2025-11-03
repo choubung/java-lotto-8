@@ -7,12 +7,9 @@ public class Application {
         LottoMachine machine = new LottoMachine();
         WinningLottoManager winningLottoManager = new WinningLottoManager();
 
-        machine.BuyLotto();
-
-        System.out.println("당첨번호를 입력해 주세요.");
-        winningLottoManager.saveWinningLotto();
-
-        winningLottoManager.printLottoResult(machine);
+        machine.BuyLotto(); // 로또 구매
+        winningLottoManager.saveWinningLotto(); // 당첨 번호 입력 받아 저장
+        winningLottoManager.printLottoResult(machine); // 당첨 결과 출력
     }
 }
 
