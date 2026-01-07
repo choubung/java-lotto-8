@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class ParserTest {
     @DisplayName("유효하지 않은 로또번호 예외 처리")
@@ -22,9 +24,10 @@ public class ParserTest {
     @ParameterizedTest(name = "입력값 \"{0}\" 통과")
     @ValueSource(strings = {"1,2,3,4,5,6"})
     void noExceptionTest(String input) {
-        assertThatCode(() -> {
-            Parser.parse(input);
-        })
-                .doesNotThrowAnyException();
+        // when
+        List<Integer> result = Parser.parse(input);
+
+        //then
+        assertThat(result).isEqualTo(Arrays.asList(1,2,3,4,5,6));
     }
 }
