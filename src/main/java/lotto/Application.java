@@ -8,8 +8,7 @@ import lotto.utils.LottoMaker;
 public class Application {
     public static void main(String[] args) {
         LottoMaker lottoMaker = new LottoMaker();
-        LottoCalculator lottoCalculator = new LottoCalculator();
-        LottoMachine lottoMachine = new LottoMachine(lottoCalculator,lottoMaker);
+        LottoMachine lottoMachine = new LottoMachine(lottoMaker);
         MainController controller = new MainController(lottoMachine);
 
         controller.run();

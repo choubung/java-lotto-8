@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.domain.LottoBill;
+import lotto.domain.Lotto;
 import lotto.utils.LottoMaker;
 
 import java.util.ArrayList;
@@ -8,32 +8,35 @@ import java.util.List;
 
 public class LottoMachine {
     private final LottoMaker maker;
-    private final LottoCalculator calculator;
-    private List<LottoBill> bill = new ArrayList<>();
-    private int cnt = 0;
+    private LottoCalculator calculator;
+    private List<Lotto> list = new ArrayList<>();
+    private int amount = 0;
 
-    public LottoMachine(LottoCalculator calculator, LottoMaker lottoMaker) {
+    public LottoMachine(LottoMaker lottoMaker) {
         this.maker = lottoMaker;
-        this.calculator = calculator;
     }
 
     public void insertCash(int cash) {
-
+        this.amount = cash / 1000;
     }
 
-    public void setWinNums(List<Integer> winNums) {
-
+    public void setWinNumsAndBonus(List<Integer> winNums, int winBonus) {
+        calculator = new LottoCalculator(winNums, winBonus);
     }
 
-    public void setWinBonusNum (int num) {
+    public List<Lotto> releaseLotto() {
+        for (int i = 0; i < amount; i++){
+            list.add(new Lotto(maker.releaseLotto()));
+        }
 
-    }
-
-    public void releaseLotto() {
-        maker.releaseLotto();
+        return list;
     }
 
     public void calculateLotto() {
 
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

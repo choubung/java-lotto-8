@@ -1,11 +1,13 @@
 package lotto.utils;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 import java.util.List;
 
 public class LottoMaker {
-    private List<Integer> lottoNums; //size 6
-
     public List<Integer> releaseLotto() {
-        return null;
+        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+
+        return numbers;
     }
 }

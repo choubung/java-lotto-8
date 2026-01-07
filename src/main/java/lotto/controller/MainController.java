@@ -18,7 +18,7 @@ public class MainController {
     }
 
     public void run() {
-        // TODO: 1. 로또 구입 (금액, 당첨번호, 보너스 번호)
+        // 1. 로또 구입 (금액, 당첨번호, 보너스 번호)
         retryUntilValid(this::buyLotto);
 
         // TODO: 2. 로또 정보 계산
@@ -29,17 +29,14 @@ public class MainController {
     }
 
     private void buyLotto() {
-        // TODO: 금액
         int cash = inputView.readCash();
         lottoMachine.insertCash(cash);
 
-        // TODO: 당첨 번호
         List<Integer> winNum = inputView.readWinLottoNum();
-        lottoMachine.setWinNums(winNum);
-
-        // TODO: 보너스 번호
         int winBonus = inputView.readWinBonusNum();
-        lottoMachine.setWinBonusNum(winBonus);
+        lottoMachine.setWinNumsAndBonus(winNum, winBonus);
+
+        outputView.printLotto(lottoMachine.getAmount(), lottoMachine.releaseLotto());
     }
 
     private void calculateLotto() {
@@ -47,7 +44,6 @@ public class MainController {
     }
 
     private void printResult(){
-        outputView.printLottos(0, null);
         outputView.printWin(null);
         outputView.printProfit(0.0F);
     }

@@ -1,10 +1,13 @@
 package lotto.view;
+
+import lotto.domain.Lotto;
+
 import java.util.List;
 
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
 
-    public void printLottos(int cnt, List<List<Integer>> lotto){
+    public void printLotto(int cnt, List<Lotto> lotto){
 
     }
 
