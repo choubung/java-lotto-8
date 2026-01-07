@@ -21,8 +21,8 @@ public class MainController {
         // 1. 로또 구입 (금액, 당첨번호, 보너스 번호)
         retryUntilValid(this::buyLotto);
 
-        // TODO: 2. 로또 정보 계산
-        retryUntilValid(this::calculateLotto);
+        // 2. 로또 정보 계산
+        retryUntilValid(this::matchLotto);
 
         // TODO: 3. 결과 출력
         retryUntilValid(this::printResult);
@@ -39,8 +39,8 @@ public class MainController {
         outputView.printLotto(lottoMachine.getAmount(), lottoMachine.releaseLotto());
     }
 
-    private void calculateLotto() {
-
+    private void matchLotto() {
+        lottoMachine.matchLotto();
     }
 
     private void printResult(){

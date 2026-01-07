@@ -32,9 +32,13 @@ public class LottoMachine {
         return list;
     }
 
-    public void calculateLotto() {
-
+    public void matchLotto() {
+        for (Lotto lotto : list) {
+            calculator.matchAndSave(lotto);
+        }
     }
+
+
 
     public int getAmount() {
         return amount;
