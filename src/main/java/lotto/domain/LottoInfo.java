@@ -21,8 +21,11 @@ public enum LottoInfo {
     }
 
     public static LottoInfo from(int input, boolean bonus) {
-        if (input == 5 && bonus) {
-            return LottoInfo.SECOND;
+        if (input == 5) {
+            if (bonus) {
+                return LottoInfo.SECOND;
+            }
+            return LottoInfo.THIRD;
         }
 
         return Arrays.stream(values())

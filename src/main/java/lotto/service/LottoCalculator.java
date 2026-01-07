@@ -36,8 +36,8 @@ public class LottoCalculator {
         return result;
     }
     
-    public Double calculateProfit() {
-        double profit = totalIncome / (winResult.size() * 1000);
+    public Double calculateProfit(int amount) {
+        double profit = totalIncome / amount * 100;
         return profit;
     }
 

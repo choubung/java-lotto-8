@@ -14,7 +14,7 @@ public class Parser {
 
         if (matcher.matches()) {
             try {
-                for (int i = 1; i < nums.size() + 1; i++ ){
+                for (int i = 1; i < 7; i++ ){
                     nums.add(Integer.parseInt(matcher.group(i).trim()));
                 }
 

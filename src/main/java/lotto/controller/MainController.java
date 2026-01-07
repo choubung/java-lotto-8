@@ -29,11 +29,11 @@ public class MainController {
     }
 
     private void buyLotto() {
-        int cash = inputView.readCash();
+        int cash = retryUntilValid(inputView::readCash);
         lottoMachine.insertCash(cash);
 
-        List<Integer> winNum = inputView.readWinLottoNum();
-        int winBonus = inputView.readWinBonusNum();
+        List<Integer> winNum = retryUntilValid(inputView::readWinLottoNum);
+        int winBonus = retryUntilValid(inputView::readWinBonusNum);
         lottoMachine.setWinNumsAndBonus(winNum, winBonus);
 
         outputView.printLotto(lottoMachine.getAmount(), lottoMachine.releaseLotto());

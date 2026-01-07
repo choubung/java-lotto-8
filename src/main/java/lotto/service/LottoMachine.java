@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.LottoInfo;
 import lotto.utils.LottoMaker;
+import lotto.utils.LottoRandomMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class LottoMachine {
     }
 
     public Double calculateProfit() {
-        return calculator.calculateProfit();
+        return calculator.calculateProfit(amount * 1000);
     }
 
     public int getAmount() {
