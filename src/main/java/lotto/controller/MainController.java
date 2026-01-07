@@ -24,7 +24,7 @@ public class MainController {
         // 2. 로또 정보 계산
         retryUntilValid(this::matchLotto);
 
-        // TODO: 3. 결과 출력
+        // 결과 출력
         retryUntilValid(this::printResult);
     }
 
@@ -44,7 +44,7 @@ public class MainController {
     }
 
     private void printResult(){
-        outputView.printWin(null);
+        outputView.printWin(lottoMachine.calculateWinCount());
         outputView.printProfit(0.0F);
     }
 

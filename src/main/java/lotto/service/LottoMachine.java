@@ -1,10 +1,12 @@
 package lotto.service;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoInfo;
 import lotto.utils.LottoMaker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMachine {
     private final LottoMaker maker;
@@ -38,7 +40,9 @@ public class LottoMachine {
         }
     }
 
-
+    public Map<LottoInfo, Integer> calculateWinCount() {
+        return calculator.calculateWinCount();
+    }
 
     public int getAmount() {
         return amount;

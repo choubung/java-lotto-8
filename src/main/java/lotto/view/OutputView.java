@@ -1,8 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
@@ -11,7 +13,7 @@ public class OutputView {
 
     }
 
-    public void printWin(List<Integer> win) {
+    public void printWin(Map<LottoInfo, Integer> win) {
 
     }
 

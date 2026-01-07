@@ -3,10 +3,7 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.LottoInfo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoCalculator {
     private final Lotto lotto;
@@ -24,6 +21,16 @@ public class LottoCalculator {
         List<Integer> numbers = lotto.getNumbers();
 
         winResult.add(LottoInfo.from(correctCount(numbers), numbers.contains(bonus)));
+    }
+
+    public Map<LottoInfo, Integer> calculateWinCount() {
+        Map<LottoInfo, Integer> result = new HashMap<>();
+
+        for (LottoInfo lottoInfo : LottoInfo.values()) {
+            result.put(lottoInfo, Collections.frequency(winResult, lottoInfo));
+        }
+
+        return result;
     }
 
     private int correctCount(List<Integer> numbers) {
