@@ -9,6 +9,7 @@ public class LottoCalculator {
     private final Lotto lotto;
     private final int bonus;
     private List<LottoInfo> winResult = new ArrayList<>();
+    private double totalIncome = 0;
 
     public LottoCalculator(List<Integer> numbers, int bonus) {
         this.lotto = new Lotto(numbers);
@@ -23,14 +24,21 @@ public class LottoCalculator {
         winResult.add(LottoInfo.from(correctCount(numbers), numbers.contains(bonus)));
     }
 
-    public Map<LottoInfo, Integer> calculateWinCount() {
+    public Map<LottoInfo, Integer> calculateWin() {
         Map<LottoInfo, Integer> result = new HashMap<>();
-
+        
         for (LottoInfo lottoInfo : LottoInfo.values()) {
-            result.put(lottoInfo, Collections.frequency(winResult, lottoInfo));
+            int count = Collections.frequency(winResult, lottoInfo);
+            totalIncome += count * lottoInfo.getPrize();
+            result.put(lottoInfo, count);
         }
 
         return result;
+    }
+    
+    public Double calculateProfit() {
+        double profit = totalIncome / (winResult.size() * 1000);
+        return profit;
     }
 
     private int correctCount(List<Integer> numbers) {

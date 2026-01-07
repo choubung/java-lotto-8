@@ -45,7 +45,7 @@ public class MainController {
 
     private void printResult(){
         outputView.printWin(lottoMachine.calculateWinCount());
-        outputView.printProfit(0.0F);
+        outputView.printProfit(lottoMachine.calculateProfit());
     }
 
     // 1. 반환값이 있는 경우 (Supplier)

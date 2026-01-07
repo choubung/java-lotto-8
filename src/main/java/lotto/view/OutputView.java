@@ -17,7 +17,7 @@ public class OutputView {
 
     }
 
-    public void printProfit(float profit) {
+    public void printProfit(Double profit) {
 
     }
 

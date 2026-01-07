@@ -41,7 +41,11 @@ public class LottoMachine {
     }
 
     public Map<LottoInfo, Integer> calculateWinCount() {
-        return calculator.calculateWinCount();
+        return calculator.calculateWin();
+    }
+
+    public Double calculateProfit() {
+        return calculator.calculateProfit();
     }
 
     public int getAmount() {
